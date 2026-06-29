@@ -1,0 +1,226 @@
+:root {
+  color-scheme: dark;
+  --map-margin-total: 260px;
+  --stage: #b3dbe7;
+  --panel: #11161b;
+  --card: #181f25;
+  --line: rgba(255, 255, 255, 0.13);
+  --text: #f7f2ec;
+  --muted: #b9b0a6;
+  --gold: #e0b75b;
+  --red: #d95b55;
+  --input: #0b0f13;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #0c1014;
+  color: var(--text);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Microsoft YaHei", sans-serif;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) minmax(0, auto) minmax(250px, 1fr);
+  gap: clamp(12px, 2vw, 28px);
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 clamp(12px, 2vw, 28px);
+}
+
+.portrait-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(66.6667vh, calc(100vw - 560px));
+  min-width: 360px;
+  height: 100vh;
+  background: var(--stage);
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: min(1440px, calc(100% - var(--map-margin-total)), calc(100vh - var(--map-margin-total)));
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background: #111;
+}
+
+.panel {
+  min-width: 0;
+  height: 100vh;
+  overflow: auto;
+  padding: 18px 0;
+}
+
+.card {
+  border: 1px solid var(--line);
+  background: rgba(24, 31, 37, 0.94);
+  padding: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
+}
+
+.card + .card {
+  margin-top: 12px;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  color: var(--gold);
+  font-size: 30px;
+  line-height: 1;
+}
+
+h2 {
+  color: var(--gold);
+  font-size: 17px;
+}
+
+button,
+input {
+  border: 1px solid var(--line);
+  color: var(--text);
+  font: inherit;
+}
+
+button {
+  width: 100%;
+  height: 42px;
+  margin-top: 14px;
+  background: linear-gradient(180deg, #ba433c, #7e2327);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+.result {
+  display: grid;
+  gap: 4px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.result span,
+label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.result strong {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.setting-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+label {
+  display: grid;
+  gap: 5px;
+}
+
+input {
+  width: 100%;
+  height: 34px;
+  padding: 0 9px;
+  background: var(--input);
+}
+
+input::placeholder {
+  color: #6f777e;
+}
+
+input:focus {
+  outline: 2px solid rgba(179, 219, 231, 0.45);
+  outline-offset: 1px;
+}
+
+.log-card ol {
+  display: grid;
+  gap: 6px;
+  max-height: 32vh;
+  min-height: 120px;
+  margin: 12px 0 0;
+  padding-left: 20px;
+  overflow: auto;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.log-card li::marker {
+  color: var(--gold);
+}
+
+@media (max-width: 1050px) {
+  body {
+    overflow: auto;
+  }
+
+  .app {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .portrait-stage {
+    order: -1;
+    width: 100%;
+    min-width: 0;
+    height: min(100vh, 900px);
+  }
+
+  .panel {
+    height: auto;
+    padding: 0;
+  }
+
+  .right-panel {
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 620px) {
+  .app {
+    padding: 0;
+    gap: 10px;
+  }
+
+  .portrait-stage {
+    height: 100vh;
+  }
+
+  canvas {
+    width: min(calc(100vw - 20px), calc(100vh - var(--map-margin-total)));
+  }
+
+  .panel {
+    padding: 0 10px;
+  }
+}
